@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>User panel</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<!--верхняя черная панель-->
+<header>
+    <nav class="navbar navbar-expand-gl navbar-dark bg-dark">
+        <a class="navbar-brand text-white"
+           th:text="|${user.getEmail()} with roles: |">
+        </a>
+        <th:block th:each="user : ${user.getRoles()}">
+            <a th:text="${user.getRoleWithoutPrefix()}" class="navbar-brand text-white"></a>
+        </th:block>
+        <div class="nav ml-auto">
+            <a th:href="@{/logout}" class="text-white-50 text-right">Logout</a>
+        </div>
+    </nav>
+</header>
+<!--боковая панель-->
+<!--общий контейнер для всего-->
+<div class="container-fluid min-vh-100">
+    <div class="row vh-100">
+        <!--контейнер для боковой панели Юзер Админ-->
+        <div class="col-md-2 g-0 py-3">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#user" role="tab" aria-controls="user" aria-selected="false">User</a>
+                </li>
+            </ul>
+        </div>
+        <!--контейнер для содержимого кнопок боковой панели-->
+        <div class="col-md-10 bg-light gx-5 py-3 tab-content">
+            <div class="tab-pane fane show active" id="user-panel" role="tabpanel"
+                 aria-labelledby="user-nav-link" tabindex="0">
+                <h2>User information-page</h2>
+                <div class="tab-content" role="tabpanel" aria-labelledby="admin-nav-link">
+                    <div class="tab-pane fade show active" role="tabpanel" tabindex="0">
+                        <div class="card">
+                            <h5 class="card-header">About user</h5>
+                            <div class="card-body text-center">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Role</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td th:text="${user.getId()}"></td>
+                                        <td th:text="${user.getFirstName()}"></td>
+                                        <td th:text="${user.getLastName()}"></td>
+                                        <td th:text="${user.getUsername()}"></td>
+                                        <td th:text="${user.getAge()}"></td>
+                                        <td> <th:block th:each="user : ${user.getRoles()}">
+                                            <label th:text="${user.getRoleWithoutPrefix()}"></label>
+                                        </th:block></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
